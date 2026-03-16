@@ -288,12 +288,17 @@ def main(page: ft.Page):
         )
     )
 
-port = int(os.environ.get("PORT", 8000))
-
-ft.app(
-    target=main,
-    assets_dir="assets",
-    port=port
+# --- SECCIÓN MODIFICADA PARA RENDER ---
+if __name__ == "__main__":
+    # Render asigna un puerto dinámico; si no existe, usamos el 8000
+    port = int(os.environ.get("PORT", 8000))
+    
+    ft.app(
+        target=main,
+        assets_dir="assets",
+        view=ft.AppView.WEB_BROWSER, # Obligatorio para Render
+        host="0.0.0.0",               # Obligatorio para Render
+        port=port
 )
 ```
 
